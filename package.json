@@ -1,0 +1,23 @@
+{
+  "name": "learn-clasp-google-apps-script-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pawper/learn-clasp-google-apps-script-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pawper/learn-clasp-google-apps-script-cli/issues"
+  },
+  "homepage": "https://github.com/Pawper/learn-clasp-google-apps-script-cli#readme",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.20"
+  }
+}
