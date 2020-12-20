@@ -1,3 +1,52 @@
+function testData1() {
+  const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+  const sheet = SpreadsheetApp.openById(id).getSheets()[0];
+  const lastCol = sheet.getLastColumn()
+  const lastRow = sheet.getLastRow()
+  const range = sheet.getRange(1, 1, lastRow, lastCol);
+  const rangeData = sheet.getDataRange();
+  const lastCorner = sheet.getRange(lastRow, lastCol);
+  lastCorner.setBackground('red');
+  Logger.log(lastCorner.getValue());
+  //Logger.log(rangeData.getValues());
+  Logger.log(lastCol, lastRow);
+  //Logger.log(range.getValues());
+}
+
+function getMyRange() {
+  const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+  const ss = SpreadsheetApp.openById(id);
+  const sheet = ss.getSheets()[0];
+  const range = sheet.getRange(1, 4, 2, 2);
+  const data = range.getValues();
+  range.setValues([['test1', 'test2'], ['test3', 'test4']]);
+  range.setBackground('blue');
+  Logger.log(data);
+}
+
+function addColors2() {
+  const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+  const ss = SpreadsheetApp.openById(id);
+  const sheet = ss.getSheets()[0];
+  let backColor = 'red';
+  let mySize = 10;
+  for(let rows = 1; rows < 51; rows++){
+    for(let cols = 1; cols < 11; cols++){
+      let total = rows + cols;
+      if((total % 2) == 0) {
+        backColor = 'red';
+      } else {
+        backColor = 'pink'
+      }
+      let range = sheet.getRange(rows,cols);
+      range.setBackground(backColor);
+      range.setFontColor('white');
+      range.setFontSize(mySize + cols);
+      range.setValue(total);
+    }
+  }
+}
+
 function addColors() {
   const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
   const ss = SpreadsheetApp.openById(id);
