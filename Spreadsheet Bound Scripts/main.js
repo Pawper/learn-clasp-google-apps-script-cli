@@ -1,38 +1,33 @@
 const GLVAL = 'Testing Global Value';
+let COUNTER = 0;
 
 function onOpen() {
+  PropertiesService.getDocumentProperties().setProperty('cnt', 0)
   const ui = SpreadsheetApp.getUi();
   ui.createMenu("adv")
-    .addItem('showModal1', 'modal1')
-    .addItem('showModal2', 'modal2')
-    .addItem('showModal3', 'modal3')
+    .addItem('showSide1', 'side1')
+    .addItem('showSide2', 'side2')
+    .addItem('showSide3', 'side3')
     .addToUi();
 }
 
-function modal3() {
+function side1() {
   const ui = SpreadsheetApp.getUi();
   const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
-  html.setHeight(300);
-  html.setWidth(800);
-  ui.showDialog(html);
+  ui.showSidebar(html);
 }
-
-function modal2() {
+function side2() {
   const ui = SpreadsheetApp.getUi();
-  // const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
   const html = HtmlService.createHtmlOutputFromFile('temp');
-  html.setHeight(300);
-  html.setWidth(800);
-  ui.showModelessDialog(html, 'Modeless');
+  ui.showSidebar(html);
 }
-
-function modal1() {
+function side3() {
+  COUNTER = PropertiesService.getDocumentProperties().getProperty('cnt');
+  COUNTER++;
+  PropertiesService.getDocumentProperties().setProperty('cnt', COUNTER)
   const ui = SpreadsheetApp.getUi();
-  // const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
   const html = HtmlService.createTemplateFromFile('temp1').evaluate();
-  html.setHeight(300);
-  html.setWidth(800);
-  ui.showModalDialog(html, 'test 1');
+  ui.showSidebar(html);
 }
 
 function logVal(val) {
