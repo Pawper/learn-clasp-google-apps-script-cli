@@ -1,21 +1,45 @@
-function test2() {
+function addContent() {
   const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
   const ss = SpreadsheetApp.openById(id);
-  ss.setActiveSheet(ss.getSheets()[0]);
-  const sheet = ss.getActiveSheet();
-  const range = sheet.getRange('B2:G5');
-  const dimArr = [range.getLastRow(), range.getNumRows(), range.getLastColumn(), range.getNumColumns()];
-  Logger.log(dimArr);
-
-  sheet.setActiveRange(range);
-  //range.setBackground('yellow');
-  Logger.log(sheet.getName());
-  const selectedSel = sheet.getSelection();
-  const selRange = selectedSel.getActiveRange();
-  const data = selRange.getValues();
-  selRange.setBackground('purple');
-  Logger.log(data);
+  const sheet = ss.getSheetByName('test');
+  Logger.log(sheet);
+  let startPos = 5;
+  let startVal = sheet.getRange(startPos, 1).getValue();
+  sheet.getRange(startPos, 1).setValue(startVal + ' START');
+  sheet.insertRowAfter(startPos);
+  sheet.getRange(startPos + 1, 1).setValue('AFTER');
+  sheet.insertRowBefore(startPos);
+  sheet.getRange(startPos, 1).setValue('BEFORE');
+  let tempArr = [sheet.getLastRow() + 1,'test', 2, 'hello world'];
+  sheet.appendRow(tempArr);
 }
+
+function addAboveFirst() {
+  const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+  const ss = SpreadsheetApp.openById(id);
+  const sheet = ss.getSheetByName('test');
+  sheet.insertRowBefore(1);
+  sheet.getRange(1, 1).setValue('INSERTED ABOVE FIRST ROW');
+}
+
+// function test2() {
+//   const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+//   const ss = SpreadsheetApp.openById(id);
+//   ss.setActiveSheet(ss.getSheets()[0]);
+//   const sheet = ss.getActiveSheet();
+//   const range = sheet.getRange('B2:G5');
+//   const dimArr = [range.getLastRow(), range.getNumRows(), range.getLastColumn(), range.getNumColumns()];
+//   Logger.log(dimArr);
+
+//   sheet.setActiveRange(range);
+//   //range.setBackground('yellow');
+//   Logger.log(sheet.getName());
+//   const selectedSel = sheet.getSelection();
+//   const selRange = selectedSel.getActiveRange();
+//   const data = selRange.getValues();
+//   selRange.setBackground('purple');
+//   Logger.log(data);
+// }
 
 // function testData1() {
 //   const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
