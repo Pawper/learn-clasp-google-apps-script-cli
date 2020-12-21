@@ -1,3 +1,21 @@
+function prepender(val, sheet) {
+  sheet.insertRowBefore(1);
+  let cloneArr = val.map((x) => x);
+  cloneArr.push('START');
+  const range = sheet.getRange(1, 1, 1, cloneArr.length);
+  range.setValues([cloneArr]);  
+}
+
+function addContent2() {
+  const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
+  const ss = SpreadsheetApp.openById(id);
+  const sheet = ss.getSheetByName('test');
+  let tempArr = [sheet.getLastRow() + 1,'NEW CONTENT'];
+  prepender(tempArr, sheet);
+  tempArr.push('END');
+  sheet.appendRow(tempArr);
+}
+
 function addContent() {
   const id = '1O7i2t-kgql1nXOibwLUg7hOGMOJDGlVN7DrwavGYVbQ';
   const ss = SpreadsheetApp.openById(id);
