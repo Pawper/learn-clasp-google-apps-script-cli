@@ -1,45 +1,38 @@
+const GLVAL = 'Testing Global Value';
+
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu("adv")
-    .addItem('alert', 'popUp1')
-    .addItem('prompt1', 'popUp2')
-    .addItem('prompt2', 'popUp3')
+    .addItem('showModal1', 'modal1')
+    .addItem('showModal2', 'modal2')
+    .addItem('showModal3', 'modal3')
     .addToUi();
 }
 
-function popUp3() {
+function modal3() {
   const ui = SpreadsheetApp.getUi();
-  const rep = ui.prompt('Do you like Apps Script rate 1-5?', ui.ButtonSet.YES_NO_CANCEL);
-  logVal(rep.getSelectedButton());
-  if (rep.getSelectedButton() == ui.Button.YES) {
-    logVal('YES User rated ' + rep.getResponseText());
-  } else if (rep.getSelectedButton() == ui.Button.NO) {
-    logVal('NO User rated ' + rep.getResponseText());
-  } else {
-    logVal("User Cancelled");
-  }
+  const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
+  html.setHeight(300);
+  html.setWidth(800);
+  ui.showDialog(html);
 }
 
-function popUp2() {
+function modal2() {
   const ui = SpreadsheetApp.getUi();
-  const rep = ui.prompt('Tell me your name?');
-  logVal(rep.getSelectedButton());
-  if (rep.getSelectedButton() == ui.Button.OK) {
-    logVal(rep.getResponseText());
-  } else {
-    logVal("Prompt Closed");
-  }
+  // const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
+  const html = HtmlService.createHtmlOutputFromFile('temp');
+  html.setHeight(300);
+  html.setWidth(800);
+  ui.showModelessDialog(html, 'Modeless');
 }
 
-function popUp1() {
+function modal1() {
   const ui = SpreadsheetApp.getUi();
-  const rep = ui.alert("confirm", "Do you agree?", ui.ButtonSet.YES_NO);
-  logVal(rep);
-  if (rep == ui.Button.YES) {
-    logVal("yes was pressed");
-  } else {
-    logVal("no was pressed");
-  }
+  // const html = HtmlService.createHtmlOutput('<h1>Hello World</h1><p>Tested</p>');
+  const html = HtmlService.createTemplateFromFile('temp1').evaluate();
+  html.setHeight(300);
+  html.setWidth(800);
+  ui.showModalDialog(html, 'test 1');
 }
 
 function logVal(val) {
