@@ -1,15 +1,31 @@
-function SELVALA1 () {
-  return SpreadsheetApp.getActive().getActiveRange().getA1Notation();
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('adv')
+  .addItem('addComment', 'adder')
+  .addToUi();
 }
 
-function addForm() {
-  const ss = SpreadsheetApp.getActive();
-  const sheet = ss.getSheetByName('test');
-  const range = sheet.getRange('C1:C5');
-  range.setFormula('=SUM(A1:B1)');
-  range.setFontColor('red');
-  range.setBackground('pink');
+function adder() {
+  const ui = SpreadsheetApp.getUi();
+  const cell = SpreadsheetApp.getActive().getActiveSheet().getActiveCell();
+  const rep = ui.prompt('What comment would you like to add?');
+  if (rep.getSelectedButton() == ui.Button.OK) {
+    cell.setComment(rep.getResponseText());
+  }
 }
+
+// function SELVALA1 () {
+//   return SpreadsheetApp.getActive().getActiveRange().getA1Notation();
+// }
+
+// function addForm() {
+//   const ss = SpreadsheetApp.getActive();
+//   const sheet = ss.getSheetByName('test');
+//   const range = sheet.getRange('C1:C5');
+//   range.setFormula('=SUM(A1:B1)');
+//   range.setFontColor('red');
+//   range.setBackground('pink');
+// }
 
 // const GLVAL = 'Testing Global Value';
 // let COUNTER = 0;
